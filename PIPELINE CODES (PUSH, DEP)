@@ -1,32 +1,35 @@
 PUSHING:
 
-pipeline {
+pipeline{
+    
     agent any 
     
     stages {
         stage('checkout') {
             steps {
-                git 'https://github.com/RAHAMSHAIK007/dockernewproject.git'
+                git 'https://github.com/Jagadeeshijjada/dockermsproject.git'
             }
         }
         stage('build') {
             steps {
-                sh 'docker build -t $img .'
+                sh 'docker build -t $image .'
             }
         }
         stage('tag') {
             steps {
-                sh 'docker tag $img $repo'
+                sh 'docker tag $image $repo'
             }
         }
         stage('push') {
             steps {
-                sh 'docker login -u rahamshaik -p Raham@#123'
+                sh 'docker login -u jagadeeshijjada -p $password'
                 sh 'docker push $repo'
             }
         }
     }
 }
+  
+
 
 
 DEPLOYMENT:
@@ -37,12 +40,12 @@ pipeline {
     stages {
         stage('check') {
             steps {
-                git 'https://github.com/RAHAMSHAIK007/dockernewproject.git'
+                git 'https://github.com/Jagadeeshijjada/dockermsproject.git'
             }
         }
         stage('stack') {
             steps {
-                sh 'docker stack deploy -c docker-compose.yml courses'
+                sh 'docker stack deploy -c docker-compose.yml paytm'
             }
         }
     }
